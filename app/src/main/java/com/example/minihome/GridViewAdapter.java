@@ -43,18 +43,27 @@ public class GridViewAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         ImageView imageView;
-
+        // TODO:replace the image view with AppIconView
+        AppIconView appIconView;
+        
         if (view == null) {
             // create the sub component of grid view
             imageView = new ImageView(context);
             imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
             imageView.setLayoutParams(new ViewGroup.LayoutParams(100,100));
+            
+            appIconView = new AppIconView(context);
+            appIconView.setScaleType(AppIconView.ScaleType.FIT_CENTER);
+            appIconView.setLayoutParams(new ViewGroup.LayoutParams(100,100));
         } else {
+            appIconView = (AppIconView) view;
             imageView = (ImageView) view;
         }
 //        Log.i("appList",appList.toString());
         ResolveInfo appInfo = appList.get(i);
+        appIconView.setImageDrawable(appInfo.activityInfo.loadIcon(context.getPackageManager()));
         imageView.setImageDrawable(appInfo.activityInfo.loadIcon(context.getPackageManager()));
+        // return appIconView;
         return imageView;
     }
 }
